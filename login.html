@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>Login</title>
+<link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+
+<div id = "login-header">
+<img src = "logo.png" style="width: 100px; height: 100px;">
+<h2 style="float: right;margin-right:45%;">SSeidstore</h2>
+</div>
+
+<br><br>
+
+<div id="login-user">
+    
+<h1>LOGIN</h1>
+
+<label> Username/Email</label><br>
+<input type = "text" id = "username"><br>
+
+<label> Password</label><br>
+<input type = "password" id = "password"><br>
+
+
+<br>
+<input type = "submit" onclick = "login()" value = "Login"><br>
+<p id="loginMessage"></p>
+
+<br>
+<a href = "register.html">
+<input type ="Submit" value="Register"><br>
+</a>
+</div>
+
+
+</body>
+
+</html>
+
+<script> 
+
+function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        window.location.href = "home.html";
+    } else {
+        document.getElementById("loginMessage").innerText = "Invalid username or password.";
+    }
+}
+
+</script>
